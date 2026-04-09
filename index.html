@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Sincronizado</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+
+    video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<video id="video" autoplay muted loop playsinline>
+  <source src="video1.mp4" type="video/mp4">
+</video>
+
+<script>
+  const video = document.getElementById("video");
+
+  video.addEventListener("loadedmetadata", () => {
+    const duration = video.duration;
+
+    const now = Date.now() / 1000; // segundos actuales
+    const startTime = now % duration;
+
+    video.currentTime = startTime;
+  });
+</script>
+
+</body>
+</html>
